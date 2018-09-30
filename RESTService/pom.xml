@@ -5,8 +5,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.flac</groupId>
-  <artifactId>RESTService</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>restservice</artifactId>
+  <version>1.0</version>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -23,14 +23,35 @@
 
   <properties>
     <java.version>1.8</java.version>
+    <docker.image.prefix>flac1</docker.image.prefix>
   </properties>
-
 
   <build>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>1.4.4</version>
+        <executions>
+          <execution>
+            <id>default</id>
+            <phase>install</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <repository>${docker.image.prefix}/${project.artifactId}</repository>
+          <pullNewerImage>false</pullNewerImage>
+          <buildArgs>
+            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+        </configuration>
       </plugin>
     </plugins>
   </build>
