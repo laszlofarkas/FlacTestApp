@@ -12,23 +12,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class MessageController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MessageController.class);
 
   @Autowired
-  private MessageService jsonService;
+  private MessageService messageService;
 
-  @RequestMapping("/")
-  public String hello() {
-    return "Hello world!";
+  @RequestMapping(value = "/", method = RequestMethod.GET)
+  public ResponseEntity<List<Object>> getMessages() {
+    return new ResponseEntity<>(messageService.getAllmessage(), HttpStatus.OK);
   }
 
   @RequestMapping(value = "/", method = RequestMethod.PUT)
   public ResponseEntity<?> saveMessage(@RequestBody Object message) {
     try {
-      jsonService.processMessage(message);
+      messageService.processMessage(message);
       return new ResponseEntity<>(HttpStatus.OK);
     } catch (JsonProcessingException e) {
       LOGGER.error("Unable to save message", e);
