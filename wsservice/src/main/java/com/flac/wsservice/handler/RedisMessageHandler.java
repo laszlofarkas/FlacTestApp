@@ -13,6 +13,11 @@ public class RedisMessageHandler {
   @Autowired
   private WebSocketHandler webSocketHandler;
 
+  /**
+   * Handling incoming new Redis message
+   *
+   * @param message new message
+   */
   public void receiveMessage(String message) {
     LOGGER.info("Received <" + message + ">");
     webSocketHandler.broadcast(message);

@@ -18,10 +18,18 @@ public class WebSocketHandler extends TextWebSocketHandler {
   private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketHandler.class);
   private static List<WebSocketSession> sessions = new ArrayList<>();
 
+  /**
+   * Add new session to the connected session list
+   * @param session new session
+   */
   private synchronized void addSession(WebSocketSession session) {
     sessions.add(session);
   }
 
+  /**
+   * Remove a disconnected session
+   * @param session which disconnected
+   */
   private synchronized void removeSession(WebSocketSession session) {
     sessions.remove(session);
   }
@@ -38,6 +46,10 @@ public class WebSocketHandler extends TextWebSocketHandler {
     LOGGER.info("Client disconnected");
   }
 
+  /**
+   * Broadcast message to all connected client
+   * @param message to be broadcast
+   */
   public void broadcast(String message) {
     TextMessage msg = new TextMessage(message);
     for (WebSocketSession session : sessions) {
@@ -48,10 +60,5 @@ public class WebSocketHandler extends TextWebSocketHandler {
       }
     }
     LOGGER.info("Message were sent");
-  }
-
-  @Override
-  protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-    broadcast(message.getPayload());
   }
 }
