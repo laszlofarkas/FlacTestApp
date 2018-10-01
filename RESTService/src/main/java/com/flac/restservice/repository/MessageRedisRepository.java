@@ -10,6 +10,10 @@ public class MessageRedisRepository {
   @Autowired
   private StringRedisTemplate template;
 
+  /**
+   * Send the given message to the "message" channel on Redis
+   * @param message
+   */
   public void send(Object message) {
     template.convertAndSend("message", message);
   }

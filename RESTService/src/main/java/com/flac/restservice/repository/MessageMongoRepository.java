@@ -15,10 +15,20 @@ public class MessageMongoRepository {
   @Autowired
   private MongoTemplate template;
 
+  /**
+   * Insert the given message into MongoDB
+   *
+   * @param message to be inserted
+   */
   public void insert(Object message) {
     template.insert(message, COLLECTION);
   }
 
+  /**
+   * List all of the stored message without _id field
+   *
+   * @return list of the stored message
+   */
   public List<Object> findAll() {
     Query q = new Query();
     q.fields().exclude("_id");
