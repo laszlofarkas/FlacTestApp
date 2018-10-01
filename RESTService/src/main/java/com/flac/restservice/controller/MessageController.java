@@ -24,7 +24,7 @@ public class MessageController {
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public ResponseEntity<List<Object>> getMessages() {
-    return new ResponseEntity<>(messageService.getAllmessage(), HttpStatus.OK);
+    return new ResponseEntity<>(messageService.getAllMessages(), HttpStatus.OK);
   }
 
   @RequestMapping(value = "/", method = RequestMethod.PUT)

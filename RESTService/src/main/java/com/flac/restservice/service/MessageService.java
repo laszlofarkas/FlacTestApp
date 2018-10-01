@@ -41,7 +41,7 @@ public class MessageService {
    *
    * @return list of the stored message
    */
-  public List<Object> getAllmessage() {
+  public List<Object> getAllMessages() {
     return messageMongoRepository.findAll();
   }
 }
