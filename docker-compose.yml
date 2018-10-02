@@ -1,0 +1,31 @@
+version: '3'
+services:
+  website:
+    build: ./website
+    depends_on: 
+      - restservice
+      - wsservice
+    ports:
+    - "80:80"
+  restservice:
+    build: ./RESTService
+    depends_on: 
+      - mongo
+      - redis
+    ports:
+    - "8080:8080"
+  wsservice:
+    build: ./wsservice
+    depends_on: 
+      - mongo
+      - redis
+    ports:
+    - "8081:8081"
+  mongo:
+    image: mongo
+    ports:
+    - "27017:27017"
+  redis:
+    image: redis
+    ports:
+    - "6379:6379"
