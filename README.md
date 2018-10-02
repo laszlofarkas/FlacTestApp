@@ -64,7 +64,6 @@ A Spring boot application for handling new incoming messages and forward them to
 - [Maven](https://maven.apache.org/index.html)
 
 #### Dependencies
-- MongoDB
 - Redis
 
 #### Run the application
@@ -95,3 +94,6 @@ ng serve --open
 - Set storage for mongoDB outside of Docker environment
 - Health-check in docker compose
 - Integration tests
+
+## Footer note
+This is my first Docker and Redis application.
