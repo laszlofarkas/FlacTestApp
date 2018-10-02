@@ -13,6 +13,7 @@ export class AppComponent implements OnInit, OnDestroy {
   messages = [];
   message = '';
   JSON = JSON;
+  errorMsg = null;
   private websocket: WebSocketSubject<Object>;
 
   constructor(
@@ -45,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log('error');
       });
     } catch (e) {
-      alert(e);
+      this.errorMsg = e;
     }
 
   }

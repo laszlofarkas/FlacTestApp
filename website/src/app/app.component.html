@@ -1,6 +1,57 @@
-<textarea name="message" id="message" [(ngModel)]="message"></textarea>
-<button type="submit" (click)="submit()">Send</button>
-{{message}}
-<div *ngFor="let msg of messages">
-  {{JSON.stringify(msg)}}
+<section class="hero is-dark">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Demo site
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="layout container">
+    <div>
+      <div class="field">
+        <label class="label">New message</label>
+        <div class="control">
+          <textarea class="textarea" name="message" id="message" [(ngModel)]="message"></textarea>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary" type="submit" (click)="submit()">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Saved messages</label>
+      <div class="content">
+        <pre *ngFor="let msg of messages.reverse()">{{JSON.stringify(msg)}}</pre>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="modal is-active" *ngIf="errorMsg">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <article class="message is-danger">
+      <div class="message-header">
+        <p>Invalid JSON</p>
+        <button class="delete" (click)="errorMsg = null"></button>
+      </div>
+      <div class="message-body">
+        <p>{{errorMsg}}</p>
+      </div>
+    </article>
+  </div>
 </div>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    Created by László Farkas
+  </div>
+</footer>
